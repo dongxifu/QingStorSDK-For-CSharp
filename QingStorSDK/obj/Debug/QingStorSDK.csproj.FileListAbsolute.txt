@@ -1,0 +1,10 @@
+E:\Codes\C#\QingStorSDK\QingStorSDK\bin\Debug\QingStorSDK.exe.config
+E:\Codes\C#\QingStorSDK\QingStorSDK\obj\Debug\QingStorSDK.csprojResolveAssemblyReference.cache
+E:\Codes\C#\QingStorSDK\QingStorSDK\bin\Debug\QingStorSDK.exe
+E:\Codes\C#\QingStorSDK\QingStorSDK\bin\Debug\QingStorSDK.pdb
+E:\Codes\C#\QingStorSDK\QingStorSDK\bin\Debug\log4net.dll
+E:\Codes\C#\QingStorSDK\QingStorSDK\bin\Debug\Newtonsoft.Json.dll
+E:\Codes\C#\QingStorSDK\QingStorSDK\bin\Debug\Newtonsoft.Json.pdb
+E:\Codes\C#\QingStorSDK\QingStorSDK\bin\Debug\Newtonsoft.Json.xml
+E:\Codes\C#\QingStorSDK\QingStorSDK\obj\Debug\QingStorSDK.exe
+E:\Codes\C#\QingStorSDK\QingStorSDK\obj\Debug\QingStorSDK.pdb
