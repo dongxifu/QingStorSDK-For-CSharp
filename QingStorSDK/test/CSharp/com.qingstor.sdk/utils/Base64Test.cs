@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using QingStorSDK.com.qingstor.sdk.utils;
+
 namespace QingStorSDK.test.CSharp.com.qingstor.sdk.utils
 {
     class Base64Test

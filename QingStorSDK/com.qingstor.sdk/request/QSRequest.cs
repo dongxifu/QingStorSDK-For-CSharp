@@ -38,13 +38,13 @@ namespace QingStorSDK.com.qingstor.sdk.request
                     validate = evnValidate;
                 }
                 OutputModel Out = QSParamInvokeUtil.getOutputModel(callback);
-                QSOkHttpRequestClient.fillResponseCallbackModel(QSConstant.REQUEST_ERROR_CODE, validate, Out);
+                QSHttpRequestClient.fillResponseCallbackModel(QSConstant.REQUEST_ERROR_CODE, validate, Out);
                 callback.onAPIResponse(Out);
             } 
             else 
             {
                 HttpWebRequest request = buildRequest(context, paramBean);
-            QSOkHttpRequestClient.getInstance()
+            QSHttpRequestClient.getInstance()
                     .requestActionAsync(request, evnContext.isSafeOkHttp(), callback);
             }
         }
@@ -140,7 +140,7 @@ namespace QingStorSDK.com.qingstor.sdk.request
             if (QSConstant.PARAM_KEY_REQUEST_API_MULTIPART.Equals(requestApi)) 
             {
                 HttpWebRequest request =
-                    QSOkHttpRequestClient.getInstance()
+                    QSHttpRequestClient.getInstance()
                             .buildStorMultiUpload(
                                     method, paramsBody, singedUrl, paramsHeaders, paramsQuery);
                 return request;
@@ -150,7 +150,7 @@ namespace QingStorSDK.com.qingstor.sdk.request
             {
                 //System.Console.WriteLine(singedUrl);
                 HttpWebRequest request =
-                    QSOkHttpRequestClient.getInstance()
+                    QSHttpRequestClient.getInstance()
                             .buildStorRequest(method, paramsBody, singedUrl, paramsHeaders);
                 return request;
             }
@@ -187,7 +187,7 @@ namespace QingStorSDK.com.qingstor.sdk.request
                         bodyContent = sr.ReadToEnd();
                     }
                     else
-                        bodyContent = QSOkHttpRequestClient.getInstance().getBodyContent(paramsBody);
+                        bodyContent = QSHttpRequestClient.getInstance().getBodyContent(paramsBody);
                     try
                     {
                         MD5 md5 = new MD5CryptoServiceProvider();
@@ -229,16 +229,16 @@ namespace QingStorSDK.com.qingstor.sdk.request
         public void sendApiRequestAsync(String requestUrl, Dictionary<object,object> context, ResponseCallBack callback)
         {
             EvnContext evnContext = (EvnContext) context[QSConstant.EVN_CONTEXT_KEY];
-            HttpWebRequest request = QSOkHttpRequestClient.getInstance().buildUrlRequest(requestUrl);
-            QSOkHttpRequestClient.getInstance().requestActionAsync(request, evnContext.isSafeOkHttp(), callback);
+            HttpWebRequest request = QSHttpRequestClient.getInstance().buildUrlRequest(requestUrl);
+            QSHttpRequestClient.getInstance().requestActionAsync(request, evnContext.isSafeOkHttp(), callback);
         }
 
         public OutputModel sendApiRequest(
             string requestUrl, Dictionary<object,object> context, Type outputClass)
         {
             EvnContext evnContext = (EvnContext) context[QSConstant.EVN_CONTEXT_KEY];
-            HttpWebRequest request = QSOkHttpRequestClient.getInstance().buildUrlRequest(requestUrl);
-            return QSOkHttpRequestClient.getInstance()
+            HttpWebRequest request = QSHttpRequestClient.getInstance().buildUrlRequest(requestUrl);
+            return QSHttpRequestClient.getInstance()
                 .requestAction(request, evnContext.isSafeOkHttp(), outputClass);
         }
 
@@ -257,7 +257,7 @@ namespace QingStorSDK.com.qingstor.sdk.request
                 try 
                 {
                     OutputModel model = (OutputModel)Activator.CreateInstance(outputClass);
-                    QSOkHttpRequestClient.fillResponseCallbackModel(QSConstant.REQUEST_ERROR_CODE, validate, model);
+                    QSHttpRequestClient.fillResponseCallbackModel(QSConstant.REQUEST_ERROR_CODE, validate, model);
                     return model;
                 } 
                 catch (Exception e) 
@@ -269,7 +269,7 @@ namespace QingStorSDK.com.qingstor.sdk.request
             else 
             {
                 HttpWebRequest request = buildRequest(context, paramBean);
-                return QSOkHttpRequestClient.getInstance().requestAction(request, evnContext.isSafeOkHttp(), outputClass);
+                return QSHttpRequestClient.getInstance().requestAction(request, evnContext.isSafeOkHttp(), outputClass);
             }
         }
 

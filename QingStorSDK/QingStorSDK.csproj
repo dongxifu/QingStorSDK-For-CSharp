@@ -62,7 +62,7 @@
     <Compile Include="com.qingstor.sdk\model\RequestInputModel.cs" />
     <Compile Include="com.qingstor.sdk\model\ResponseCallbackModel.cs" />
     <Compile Include="com.qingstor.sdk\request\ParamValidate.cs" />
-    <Compile Include="com.qingstor.sdk\request\QSOkHttpRequestClient.cs" />
+    <Compile Include="com.qingstor.sdk\request\QSHttpRequestClient.cs" />
     <Compile Include="com.qingstor.sdk\request\QSRequest.cs" />
     <Compile Include="com.qingstor.sdk\request\ResourceRequest.cs" />
     <Compile Include="com.qingstor.sdk\request\ResourceRequestFactory.cs" />
@@ -100,6 +100,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="template\manifest.json" />
+    <None Include="template\service.tmpl" />
+    <None Include="template\shared.tmpl" />
+    <None Include="template\sub_services.tmpl" />
+    <None Include="template\types.tmpl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

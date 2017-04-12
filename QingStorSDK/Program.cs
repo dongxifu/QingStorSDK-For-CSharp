@@ -11,6 +11,9 @@ using System.Net;
 using QingStorSDK.test.CSharp.com.qingstor.sdk.config;
 using QingStorSDK.test.CSharp.com.qingstor.sdk.utils;
 using QingStorSDK.tests;
+using Newtonsoft.Json;
+using System.Web.Script.Serialization;
+
 namespace QingStorSDK
 {
     class Program
@@ -81,7 +84,7 @@ namespace QingStorSDK
             string objectName = "2.txt";
             Bucket.PutObjectInput input=new Bucket.PutObjectInput();
             FileStream f = new FileStream("D:\\2.txt",FileMode.Open);
-            input.setBodyInputFileStream(f);
+            input.setBodyInputFile(f);
             input.setContentLength((int)f.Length);
             Bucket.PutObjectOutput output = bucket.putObject(objectName, input);
             f.Close();
@@ -95,7 +98,7 @@ namespace QingStorSDK
             FileStream f = File.OpenRead("D:\\3.txt");
             //string text = System.IO.File.ReadAllText("D:\\1.iso");
             input.setContentLength(1024*1024*4);
-            input.setBodyInputFileStream(f);
+            input.setBodyInputFile(f);
             input.setPartNumber(0);
             input.setUploadID(output.getUploadID());
             Bucket.UploadMultipartOutput uploadMultipartOutput3 = bucket.uploadMultipart(objectName, input);
