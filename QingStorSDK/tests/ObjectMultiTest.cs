@@ -85,7 +85,7 @@ namespace QingStorSDK.tests
             FileStream f = new FileStream(System.Environment.CurrentDirectory + "/tmp/test_1",FileMode.Open);
             Bucket.UploadMultipartInput input = new Bucket.UploadMultipartInput();
             input.setContentLength((int) f.Length);
-            input.setBodyInputFileStream(f);
+            input.setBodyInputFile(f);
             input.setPartNumber(part_number);
             input.setUploadID(multipart_upload_id);
             uploadMultipartOutput1 = Bucket.uploadMultipart(multipart_upload_name,input);
@@ -109,7 +109,7 @@ namespace QingStorSDK.tests
             FileStream f = new FileStream(System.Environment.CurrentDirectory + "/tmp/test_2",FileMode.Open);
             Bucket.UploadMultipartInput input = new Bucket.UploadMultipartInput();
             input.setContentLength((int) f.Length);
-            input.setBodyInputFileStream(f);
+            input.setBodyInputFile(f);
             input.setPartNumber(part_number);
             input.setUploadID(multipart_upload_id);
             uploadMultipartOutput2 = Bucket.uploadMultipart(multipart_upload_name,input);
@@ -132,7 +132,7 @@ namespace QingStorSDK.tests
             FileStream f = new FileStream(System.Environment.CurrentDirectory + "/tmp/test_3",FileMode.Open);
             Bucket.UploadMultipartInput input = new Bucket.UploadMultipartInput();
             input.setContentLength((int) f.Length);
-            input.setBodyInputFileStream(f);
+            input.setBodyInputFile(f);
             input.setPartNumber(part_number);
             input.setUploadID(multipart_upload_id);
             uploadMultipartOutput3 = Bucket.uploadMultipart(multipart_upload_name,input);

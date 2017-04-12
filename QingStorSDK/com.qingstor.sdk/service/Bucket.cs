@@ -3546,25 +3546,25 @@ namespace QingStorSDK.com.qingstor.sdk.service
         }
 
         // The request body
-        private FileStream bodyInputFileStream;
+        private FileStream bodyInputFile;
 
-        [Param(paramType = "body", paramName = "BodyInputFileStream")]
-        public FileStream getBodyInputFileStream() {
-            return bodyInputFileStream;
+        [Param(paramType = "body", paramName = "BodyInputFile")]
+        public FileStream getBodyInputFile() {
+            return bodyInputFile;
         }
         //
-        public void setBodyInputFileStream(FileStream bodyInputFile) {
-            this.bodyInputFileStream = bodyInputFile;
+        public void setBodyInputFile(FileStream bodyInputFile) {
+            this.bodyInputFile = bodyInputFile;
         }
 
-        private Stream bodyInputStream;
+        private StreamReader bodyInputStream;
 
         [Param(paramType = "body", paramName = "BodyInputStream")]
-        public Stream getBodyInputStream() {
+        public StreamReader getBodyInputStream() {
             return bodyInputStream;
         }
 
-        public void setBodyInputStream(Stream bodyInputStream) {
+        public void setBodyInputStream(StreamReader bodyInputStream) {
             this.bodyInputStream = bodyInputStream;
         }
         public override String validateParam()
@@ -3746,26 +3746,26 @@ namespace QingStorSDK.com.qingstor.sdk.service
         }
 
         // The request body
-        private FileStream bodyInputFileStream;
+        private FileStream bodyInputFile;
 
-        [Param(paramType = "body", paramName = "BodyInputFileStream")]
-        public FileStream getBodyInputFileStream() {
+        [Param(paramType = "body", paramName = "BodyInputFile")]
+        public FileStream getBodyInputFile() {
             
-            return bodyInputFileStream;
+            return bodyInputFile;
         }
         //
-        public void setBodyInputFileStream(FileStream bodyInputFileStream) {
-            this.bodyInputFileStream = bodyInputFileStream;
+        public void setBodyInputFile(FileStream bodyInputFile) {
+            this.bodyInputFile = bodyInputFile;
         }
 
-        private Stream bodyInputStream;
+        private StreamReader bodyInputStream;
 
         [Param(paramType = "body", paramName = "BodyInputStream")]
-        public Stream getBodyInputStream() {
+        public StreamReader getBodyInputStream() {
             return bodyInputStream;
         }
 
-        public void setBodyInputStream(Stream bodyInputStream) {
+        public void setBodyInputStream(StreamReader bodyInputStream) {
             this.bodyInputStream = bodyInputStream;
         }
 

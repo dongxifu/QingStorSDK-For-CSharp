@@ -1,0 +1,119 @@
+﻿{{$service := .Data.Service}}
+{{$subServices := .Data.SubServices }}
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;
+using System.Net.Http;
+using System.Net;
+using System.Net.Mime;
+
+using QingStorSDK.com.qingstor.sdk.Attribute;
+using QingStorSDK.com.qingstor.sdk.config;
+using QingStorSDK.com.qingstor.sdk.constants;
+using QingStorSDK.com.qingstor.sdk.request;
+using QingStorSDK.com.qingstor.sdk.model;
+using QingStorSDK.com.qingstor.sdk.utils;
+using QingStorSDK.com.qingstor.sdk.service;
+
+namespace QingStorSDK.com.qingstor.sdk.service
+{
+    class Bucket
+    {
+		private String zone;
+		private String bucketName;
+		private EvnContext evnContext;
+
+		public Bucket(EvnContext evnContext,String bucketName) 
+		{
+			this.evnContext = evnContext;
+			this.zone = QSConstant.STOR_DEFAULT_ZONE;
+			this.bucketName = bucketName; 
+		}
+
+		public Bucket(EvnContext evnContext, String zone,String bucketName) 
+		{
+			this.evnContext = evnContext;
+			this.zone = zone;
+			this.bucketName = bucketName;
+		}
+
+    {{range $_, $subService := $subServices}}
+
+
+    {{range $_, $operation := $subService.Operations}}
+        {{$belongs := printf "%s" ($subService.Name | camelCase)}}
+        {{template "RenderOperation" passThrough $belongs $operation}}
+
+    {{end}}
+
+    {{ if eq $subService.Name "Object"}}
+        /**
+         *
+         * @param objectName
+         * @param expiresSecond  Relative current time，the second when this quert sign expires
+         * @return
+         * @throws QSException
+         */
+        public String GetObjectSignatureUrl(String objectName,int expiresSecond)
+		{
+            return QSSignatureUtil.getObjectAuthRequestUrl(this.evnContext,this.zone,bucketName,objectName,expiresSecond);
+        }
+
+        /**
+         *
+         * @param signaturedRequest
+         * @return
+         * @throws QSException
+         */
+       
+        public GetObjectOutput GetObjectBySignatureUrl(String signaturedRequest)
+		{
+            Dictionary<Object,Object> context = new Dictionary<Object,Object>();
+            context.Add(QSConstant.PARAM_KEY_REQUEST_ZONE,this.zone);
+            context.Add(QSConstant.EVN_CONTEXT_KEY,this.evnContext);
+            context.Add("OperationName","GetObject");
+            context.Add("APIName","GetObject");
+            context.Add("ServiceName","QingStor");
+            context.Add("RequestMethod","GET");
+            context.Add("RequestURI","/<bucket-name>/<object-key>");
+
+            Object backModel = ResourceRequestFactory.getResourceRequest().sendApiRequest(signaturedRequest,context,typeof(GetObjectOutput));
+            if(backModel != null){
+                return (GetObjectOutput)backModel;
+            }
+            return null;
+        }
+
+        /**
+         *
+         * @param signaturedRequest
+         * @param callback
+         * @throws QSException
+         */
+         
+        public void GetObjectBySignatureUrlAsync(String signaturedRequest,ResponseCallBack callback)
+		{
+            Dictionary<Object,Object> context = new Dictionary<Object,Object>();
+            context.Add(QSConstant.PARAM_KEY_REQUEST_ZONE,this.zone);
+            context.Add(QSConstant.EVN_CONTEXT_KEY,this.evnContext);
+            context.Add("OperationName","GetObject");
+            context.Add("APIName","GetObject");
+            context.Add("ServiceName","QingStor");
+            context.Add("RequestMethod","GET");
+            context.Add("RequestURI","/<bucket-name>/<object-key>");
+
+            if(callback == null){
+                throw new QSException("callback can't be null");
+            }
+
+            ResourceRequestFactory.getResourceRequest().sendApiRequestAsync(signaturedRequest,context,callback);
+        }
+        {{end}}
+
+    {{end}}
+    }
+}

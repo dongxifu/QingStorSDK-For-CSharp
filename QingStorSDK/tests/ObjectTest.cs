@@ -99,7 +99,7 @@ namespace QingStorSDK.tests
             subService = new Bucket(evnContext,bucketName);
             Bucket.PutObjectInput input = new Bucket.PutObjectInput();
             FileStream f = new FileStream("D:\\2.txt",FileMode.Open);
-            input.setBodyInputFileStream(f);
+            input.setBodyInputFile(f);
             input.setContentLength((int) f.Length);
             test_object = chinesePrefix+arg1+chineseSuffix;
             putObjectOutput = subService.putObject(test_object,input);
